@@ -1,0 +1,16 @@
+node_modules
+dist
+coverage
+reports
+.stryker-tmp
+.stryker-incremental.json
+stryker-setup-*.js
+*.log
+*.local
+.env*
+!.env.example
+.claude/settings.local.json
+CLAUDE.local.md
+.idea
+.vscode
+.DS_Store

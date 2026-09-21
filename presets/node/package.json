@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "dev": "nest start --watch",
+    "build": "nest build"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-fastify": "^11.0.0",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/testing": "^11.0.0",
+    "eslint-plugin-boundaries": "^7.2.0",
+    "unplugin-swc": "^1.5.0",
+    "@swc/core": "^1.10.0",
+    "eslint-import-resolver-typescript": "^4.4.5"
+  }
+}

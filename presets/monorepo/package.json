@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "format": "oxfmt --check .",
+    "format:fix": "oxfmt .",
+    "lint": "oxlint --deny-warnings",
+    "lint:fix": "oxlint --fix",
+    "typecheck": "pnpm -r --parallel run typecheck",
+    "test": "pnpm -r --parallel run test",
+    "mutation": "pnpm -r run mutation",
+    "deadcode": "knip",
+    "dead-files": "pnpm -r run dead-files",
+    "dead-mocks": "pnpm -r run dead-mocks",
+    "dup": "jscpd",
+    "build": "pnpm -r run build",
+    "check": "pnpm format && pnpm lint && pnpm typecheck && pnpm test && pnpm deadcode && pnpm dead-files && pnpm dead-mocks && pnpm dup && pnpm build"
+  }
+}

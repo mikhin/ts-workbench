@@ -1,0 +1,5 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["./.oxlintrc.base.json"],
+  "ignorePatterns": ["dist", "coverage", "reports", "presets", "scripts/lint-plugin/fixtures"]
+}

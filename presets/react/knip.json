@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["src/main.tsx", "scripts/*.mjs", "scripts/lint-plugin/index.cjs"],
+  "project": ["src/**/*.{ts,tsx}", "scripts/**/*.{mjs,cjs}"],
+  "ignore": ["src/api/**", "src/components/ui/**"],
+  "ignoreDependencies": ["^eslint-plugin-", "^@stylistic/"],
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  }
+}

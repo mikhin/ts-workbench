@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["src/index.ts", "scripts/*.mjs", "scripts/lint-plugin/index.cjs"],
+  "project": ["src/**/*.ts", "scripts/**/*.{mjs,cjs}"],
+  "ignoreDependencies": ["^eslint-plugin-", "^@stylistic/"],
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["../../.oxlintrc.base.json"],
+  "plugins": ["node"],
+  "jsPlugins": ["eslint-plugin-boundaries"],
+  "env": {
+    "node": true
+  },
+  "settings": {
+    "boundaries/elements": [
+      {
+        "type": "lib",
+        "pattern": "src/lib",
+        "partialMatch": true
+      },
+      {
+        "type": "types",
+        "pattern": "src/types",
+        "partialMatch": true
+      },
+      {
+        "type": "config",
+        "pattern": "src/config",
+        "partialMatch": true
+      },
+      {
+        "type": "repositories",
+        "pattern": "src/repositories",
+        "partialMatch": true
+      },
+      {
+        "type": "services",
+        "pattern": "src/services",
+        "partialMatch": true
+      },
+      {
+        "type": "controllers",
+        "pattern": "src/controllers",
+        "partialMatch": true
+      },
+      {
+        "type": "modules",
+        "pattern": "src/modules",
+        "partialMatch": true
+      },
+      {
+        "type": "dto",
+        "pattern": "src/dto",
+        "partialMatch": true
+      }
+    ],
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
+  "rules": {
+    "import/no-nodejs-modules": "off",
+    "boundaries/dependencies": [
+      "error",
+      {
+        "default": "allow",
+        "policies": [
+          {
+            "from": [
+              {
+                "element": {
+                  "type": ["services", "repositories", "lib", "types", "config", "dto"]
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["controllers", "modules"]
+                  }
+                }
+              }
+            ],
+            "message": "Business layers do not know the transport: a service, repository, lib or type file must not import controllers or modules."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": ["lib", "types", "config"]
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["services", "repositories", "controllers", "modules"]
+                  }
+                }
+              }
+            ],
+            "message": "src/lib, src/types and src/config carry no domain knowledge; put domain code in src/services."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "lib"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": "types"
+                  }
+                }
+              }
+            ],
+            "message": "src/lib is generic utility code; a domain type belongs next to the service that owns it."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "controllers"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": "repositories"
+                  }
+                }
+              }
+            ],
+            "message": "A controller reaches data through a service, never through a repository."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "repositories"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": "services"
+                  }
+                }
+              }
+            ],
+            "message": "A repository stores and loads; the decision belongs in a service."
+          }
+        ]
+      }
+    ],
+    "local/no-classes": "error",
+    "node/no-sync": "off",
+    "node/no-process-env": "off",
+    "eslint/new-cap": [
+      "error",
+      {
+        "capIsNew": false
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/controllers/**/*.ts",
+        "src/modules/**/*.ts",
+        "src/dto/**/*.ts",
+        "src/main.ts",
+        "src/**/*.module.ts",
+        "src/**/*.controller.ts",
+        "src/**/*.dto.ts",
+        "src/**/*.entity.ts"
+      ],
+      "rules": {
+        "eslint/max-classes-per-file": ["error", 1],
+        "typescript/explicit-module-boundary-types": "off",
+        "sonarjs/public-static-readonly": "off",
+        "local/no-classes": "off",
+        "eslint/class-methods-use-this": "off",
+        "typescript/explicit-member-accessibility": "off",
+        "typescript/no-extraneous-class": [
+          "error",
+          {
+            "allowWithDecorator": true
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/services/**/*.ts"],
+      "rules": {
+        "local/one-function-export": "error"
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.test.ts"],
+      "rules": {
+        "boundaries/dependencies": "off",
+        "local/no-classes": "off"
+      }
+    },
+    {
+      "files": ["src/main.ts"],
+      "rules": {
+        "promise/prefer-await-to-then": "off",
+        "unicorn/prefer-top-level-await": "off",
+        "eslint/no-console": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["dist", "coverage", "reports", "scripts/lint-plugin/fixtures"]
+}

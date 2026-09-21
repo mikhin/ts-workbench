@@ -1,0 +1,436 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["../../.oxlintrc.base.json"],
+  "plugins": ["react", "jsx-a11y"],
+  "jsPlugins": [
+    "eslint-plugin-boundaries",
+    "eslint-plugin-react-you-might-not-need-an-effect",
+    "eslint-plugin-no-relative-import-paths",
+    "eslint-plugin-filename-export"
+  ],
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "boundaries/elements": [
+      {
+        "type": "api",
+        "pattern": "src/api",
+        "partialMatch": true
+      },
+      {
+        "type": "mocks",
+        "pattern": "src/mocks",
+        "partialMatch": true
+      },
+      {
+        "type": "lib",
+        "pattern": "src/lib",
+        "partialMatch": true
+      },
+      {
+        "type": "types",
+        "pattern": "src/types",
+        "partialMatch": true
+      },
+      {
+        "type": "config",
+        "pattern": "src/config",
+        "partialMatch": true
+      },
+      {
+        "type": "services",
+        "pattern": "src/services",
+        "partialMatch": true
+      },
+      {
+        "type": "stores",
+        "pattern": "src/stores",
+        "partialMatch": true
+      },
+      {
+        "type": "hooks",
+        "pattern": "src/hooks",
+        "partialMatch": true
+      },
+      {
+        "type": "ui",
+        "pattern": "src/components/ui",
+        "partialMatch": true
+      },
+      {
+        "type": "components",
+        "pattern": "src/components",
+        "partialMatch": true
+      },
+      {
+        "type": "pages",
+        "pattern": "src/pages",
+        "partialMatch": true
+      },
+      {
+        "type": "router",
+        "pattern": "src/router",
+        "partialMatch": true
+      }
+    ],
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
+  "rules": {
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-ambiguous-text": "off",
+    "jsx-a11y/anchor-has-content": "error",
+    "jsx-a11y/anchor-is-valid": "error",
+    "jsx-a11y/aria-activedescendant-has-tabindex": "error",
+    "jsx-a11y/aria-props": "error",
+    "jsx-a11y/aria-proptypes": "error",
+    "jsx-a11y/aria-role": "error",
+    "jsx-a11y/aria-unsupported-elements": "error",
+    "jsx-a11y/autocomplete-valid": "error",
+    "jsx-a11y/click-events-have-key-events": "error",
+    "jsx-a11y/heading-has-content": "error",
+    "jsx-a11y/html-has-lang": "error",
+    "jsx-a11y/iframe-has-title": "error",
+    "jsx-a11y/img-redundant-alt": "error",
+    "jsx-a11y/label-has-associated-control": "error",
+    "jsx-a11y/media-has-caption": "error",
+    "jsx-a11y/mouse-events-have-key-events": "error",
+    "jsx-a11y/no-access-key": "error",
+    "jsx-a11y/no-autofocus": "error",
+    "jsx-a11y/no-distracting-elements": "error",
+    "jsx-a11y/no-noninteractive-tabindex": [
+      "error",
+      {
+        "tags": [],
+        "roles": ["tabpanel"],
+        "allowExpressionValues": true
+      }
+    ],
+    "jsx-a11y/no-redundant-roles": "error",
+    "jsx-a11y/no-static-element-interactions": [
+      "error",
+      {
+        "allowExpressionValues": true,
+        "handlers": ["onClick", "onMouseDown", "onMouseUp", "onKeyPress", "onKeyDown", "onKeyUp"]
+      }
+    ],
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "jsx-a11y/role-supports-aria-props": "error",
+    "jsx-a11y/scope": "error",
+    "jsx-a11y/tabindex-no-positive": "error",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/button-has-type": "error",
+    "react/only-export-components": [
+      "error",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "react-you-might-not-need-an-effect/no-adjust-state-on-prop-change": "error",
+    "react-you-might-not-need-an-effect/no-reset-all-state-on-prop-change": "error",
+    "react-you-might-not-need-an-effect/no-event-handler": "error",
+    "react-you-might-not-need-an-effect/no-pass-live-state-to-parent": "error",
+    "react-you-might-not-need-an-effect/no-pass-data-to-parent": "error",
+    "react-you-might-not-need-an-effect/no-initialize-state": "error",
+    "react-you-might-not-need-an-effect/no-chain-state-updates": "error",
+    "react-you-might-not-need-an-effect/no-derived-state": "error",
+    "react/no-multi-comp": "error",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-no-literals": "off",
+    "react/jsx-max-depth": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-set-state": "off",
+    "react/forbid-component-props": "off",
+    "react/forbid-dom-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-constructed-context-values": "error",
+    "no-relative-import-paths/no-relative-import-paths": [
+      "error",
+      {
+        "rootDir": "src",
+        "prefix": "@",
+        "allowSameFolder": false
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "pattern": {
+          "css": "always",
+          "gen": "always",
+          "config": "always",
+          "mjs": "always",
+          "cjs": "always"
+        },
+        "ignorePackages": true
+      }
+    ],
+    "boundaries/dependencies": [
+      "error",
+      {
+        "default": "allow",
+        "policies": [
+          {
+            "from": [
+              {
+                "element": {
+                  "type": ["services", "stores", "lib", "types", "config"]
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["components", "ui", "pages", "hooks"]
+                  }
+                }
+              }
+            ],
+            "message": "Business layers stay UI-free: a service, store, lib or type file must not import components, pages or hooks. A type shared with a form belongs in src/types or next to the service."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": ["lib", "types", "config"]
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["services", "stores", "router"]
+                  }
+                }
+              }
+            ],
+            "message": "src/lib, src/types and src/config carry no domain knowledge; put domain code in src/services."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "lib"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": "types"
+                  }
+                }
+              }
+            ],
+            "message": "src/lib is generic utility code; a domain type belongs next to the service that owns it, not in a lib signature."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "ui"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["services", "stores", "api", "components", "pages", "router", "types"]
+                  }
+                }
+              }
+            ],
+            "message": "src/components/ui is the design system: it knows nothing about the domain, the stores or the API, so it stays replaceable."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "components"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": "pages"
+                  }
+                }
+              }
+            ],
+            "message": "Pages compose components, not the other way round."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "hooks"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["components", "ui", "pages"]
+                  }
+                }
+              }
+            ],
+            "message": "A hook owns state, not markup; it must not import components or pages."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": [
+                    "components",
+                    "ui",
+                    "pages",
+                    "hooks",
+                    "services",
+                    "stores",
+                    "lib",
+                    "types",
+                    "config"
+                  ]
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": "mocks"
+                  }
+                }
+              }
+            ],
+            "message": "Mocks are dev-only; production code must not import src/mocks."
+          },
+          {
+            "from": [
+              {
+                "element": {
+                  "type": "router"
+                }
+              }
+            ],
+            "disallow": [
+              {
+                "to": {
+                  "element": {
+                    "type": ["services", "stores", "components", "ui", "api", "hooks"]
+                  }
+                }
+              }
+            ],
+            "message": "src/router only maps routes to pages."
+          }
+        ]
+      }
+    ],
+    "react-you-might-not-need-an-effect/no-external-store-subscription": "error",
+    "react/function-component-definition": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/components/**/*.tsx", "src/pages/**/*.tsx"],
+      "rules": {
+        "eslint/complexity": [
+          "error",
+          {
+            "max": 20,
+            "variant": "modified"
+          }
+        ],
+        "eslint/max-lines": [
+          "error",
+          {
+            "max": 150,
+            "skipBlankLines": true
+          }
+        ],
+        "eslint/max-lines-per-function": "off",
+        "filename-export/match-named-export": [
+          "error",
+          {
+            "stripextra": true
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/components/ui/**/*.{ts,tsx}"],
+      "rules": {
+        "react/no-multi-comp": "off",
+        "filename-export/match-named-export": "off",
+        "eslint/max-lines": "off"
+      }
+    },
+    {
+      "files": ["src/services/**/*.ts"],
+      "rules": {
+        "local/one-function-export": "error"
+      }
+    },
+    {
+      "files": ["src/stores/**/*.ts"],
+      "rules": {
+        "local/no-branching-exports": "error"
+      }
+    },
+    {
+      "files": [
+        "**/*.spec.{ts,tsx}",
+        "**/*.test.{ts,tsx}",
+        "src/mocks/**/*.ts",
+        "src/lib/configure-api-client.ts"
+      ],
+      "rules": {
+        "boundaries/dependencies": "off",
+        "react/no-multi-comp": "off",
+        "eslint/complexity": "off"
+      }
+    },
+    {
+      "files": ["src/main.tsx", "*.config.ts", "vitest.setup.ts"],
+      "rules": {
+        "import/no-default-export": "off",
+        "no-relative-import-paths/no-relative-import-paths": "off"
+      }
+    },
+    {
+      "files": ["scripts/**"],
+      "rules": {
+        "no-relative-import-paths/no-relative-import-paths": "off"
+      }
+    },
+    {
+      "files": ["vitest.setup.ts"],
+      "rules": {
+        "import/no-unassigned-import": "off",
+        "import/extensions": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "dist",
+    "coverage",
+    "reports",
+    "src/api",
+    "public",
+    "scripts/lint-plugin/fixtures"
+  ]
+}

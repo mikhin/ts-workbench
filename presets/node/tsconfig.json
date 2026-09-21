@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "erasableSyntaxOnly": false,
+    "verbatimModuleSyntax": false,
+    "useDefineForClassFields": false
+  },
+  "include": ["src", "scripts", "*.ts"],
+  "exclude": ["scripts/lint-plugin/fixtures"]
+}
