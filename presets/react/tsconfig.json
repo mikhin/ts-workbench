@@ -5,6 +5,6 @@
     "jsx": "react-jsx",
     "types": ["vite/client", "node"]
   },
-  "include": ["src", "scripts", "*.ts"],
+  "include": ["src", "scripts", "*.ts", "tests"],
   "exclude": ["scripts/lint-plugin/fixtures"]
 }

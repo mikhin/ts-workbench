@@ -215,9 +215,10 @@
       "rules": {
         "promise/prefer-await-to-then": "off",
         "unicorn/prefer-top-level-await": "off",
-        "eslint/no-console": "off"
+        "eslint/no-console": "off",
+        "import/no-unassigned-import": "off"
       }
     }
   ],
-  "ignorePatterns": ["dist", "coverage", "reports", "scripts/lint-plugin/fixtures"]
+  "ignorePatterns": ["dist", "coverage", "reports", "scripts/lint-plugin/fixtures", "presets"]
 }

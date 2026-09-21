@@ -23,7 +23,8 @@
     "dup:top": "jscpd -r json -o reports/jscpd -t 100 -s && node scripts/jscpd-top.mjs",
     "strip-comments": "node scripts/strip-comments.mjs",
     "check": "pnpm format && pnpm lint && pnpm typecheck && pnpm test && pnpm deadcode && pnpm dead-files && pnpm dead-mocks && pnpm dup && pnpm run --if-present build",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "preset": "node scripts/preset.mjs"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^10.0.0",

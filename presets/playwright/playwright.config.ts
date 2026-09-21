@@ -5,6 +5,7 @@ const URL = `http://localhost:${PORT}`;
 const EXPECT_TIMEOUT = 10_000;
 const TEST_TIMEOUT = 30_000;
 const SERVER_TIMEOUT = 120_000;
+const LOCAL_WORKERS = 4;
 
 export default defineConfig({
   expect: { timeout: EXPECT_TIMEOUT },
@@ -26,5 +27,5 @@ export default defineConfig({
     timeout: SERVER_TIMEOUT,
     url: URL,
   },
-  workers: process.env["CI"] ? 1 : 4,
+  workers: process.env["CI"] ? 1 : LOCAL_WORKERS,
 });

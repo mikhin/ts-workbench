@@ -465,7 +465,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.{test,spec}.{ts,tsx}"],
+      "files": ["src/**/*.{test,spec}.{ts,tsx}", "scripts/**/*.{test,spec}.{ts,tsx}"],
       "plugins": ["vitest"],
       "rules": {
         "eslint/no-magic-numbers": "off",

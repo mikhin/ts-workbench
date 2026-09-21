@@ -157,20 +157,6 @@
         "allowSameFolder": false
       }
     ],
-    "import/extensions": [
-      "error",
-      "never",
-      {
-        "pattern": {
-          "css": "always",
-          "gen": "always",
-          "config": "always",
-          "mjs": "always",
-          "cjs": "always"
-        },
-        "ignorePackages": true
-      }
-    ],
     "boundaries/dependencies": [
       "error",
       {
@@ -420,8 +406,7 @@
     {
       "files": ["vitest.setup.ts"],
       "rules": {
-        "import/no-unassigned-import": "off",
-        "import/extensions": "off"
+        "import/no-unassigned-import": "off"
       }
     }
   ],
@@ -431,6 +416,7 @@
     "reports",
     "src/api",
     "public",
-    "scripts/lint-plugin/fixtures"
+    "scripts/lint-plugin/fixtures",
+    "presets"
   ]
 }

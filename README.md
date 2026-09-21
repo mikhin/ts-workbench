@@ -10,31 +10,31 @@ monorepo layers live in `presets/` as files to copy over.
 
 ## Start a repo
 
+Use this repo as a GitHub template (or clone it and drop `.git`), then:
+
 ```
-git clone <this> my-app && cd my-app
-rm -rf .git && git init
 pnpm install
+pnpm preset react            # or: node | react playwright | monorepo
 ```
+
+`pnpm preset` copies the preset's files over the root, points their `extends` at the root base
+files, merges the preset's `scripts` and dependencies into `package.json`, appends its section to
+`CLAUDE.md`, installs, and deletes `presets/` and itself. `monorepo` keeps `presets/` so each app
+can start from one (`cp -r presets/react apps/web`, the `../../` paths already fit).
 
 `.oxlintrc.json` extends `.oxlintrc.base.json`; `tsconfig.json` extends `tsconfig.base.json`. Edit
 the thin files, leave the base alone so an upgrade is a copy.
 
-## Apply a preset
+## Presets
 
-Each preset is a folder of files that go to the same path in the repo root. Copy, then:
+| Preset       | Adds                                                                                                                                                                                                        |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `react`      | React 19 and Vite, jsx-a11y, `react-you-might-not-need-an-effect`, layer boundaries over components/pages/hooks/services/stores/lib/types, happy-dom for Vitest, a component and a service with their specs |
+| `node`       | NestJS on Fastify, layer boundaries over controllers/modules/dto/services/repositories, classes only where a decorator needs one, SWC for Vitest, a controller and a service with their specs               |
+| `playwright` | Playwright, its oxlint rule set for `tests/**`, a config that runs the app itself, one smoke spec                                                                                                           |
+| `monorepo`   | `pnpm-workspace.yaml` and root scripts that fan out with `pnpm -r`; keeps `presets/` so each app starts from one                                                                                            |
 
-- `.oxlintrc.json` and `tsconfig.json` in a preset extend `../../*.base.json`; after the copy change
-  that to `./`
-- install the packages listed in the preset's `package.json` (`pnpm add -D` its `devDependencies`,
-  merge its `scripts`)
-- delete `presets/` when done, or keep it for the next layer
-
-| Preset       | Adds                                                                                                                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `react`      | jsx-a11y, react rules, `react-you-might-not-need-an-effect`, layer boundaries for components/pages/hooks/services/stores/lib/types, happy-dom for Vitest, Stryker over services and stores |
-| `node`       | NestJS-shaped layers (controllers/services/repositories/lib/types), classes and decorators allowed in controllers, modules and DTOs only, `tsconfig` with decorator metadata               |
-| `playwright` | the `eslint-plugin-playwright` rule set as an oxlint override for `tests/**`                                                                                                               |
-| `monorepo`   | `pnpm-workspace.yaml`, root scripts that fan out, nested oxlint configs per package                                                                                                        |
+Every preset leaves `pnpm check` green, so the first commit already passes CI.
 
 ## Scripts
 
@@ -58,8 +58,14 @@ Each preset is a folder of files that go to the same path in the repo root. Copy
 ## Lint plugin
 
 `scripts/lint-plugin` is an ESLint-API plugin loaded by oxlint as `local/*`. Rules: `no-comments`,
-`one-function-export`, `no-branching-exports`. A rule is a fixture in `fixtures/` and a case in
-`lint-plugin.test.ts`; the test runs oxlint on the fixtures and asserts the diagnostics.
+`one-function-export`, `no-branching-exports`, `no-classes`. A rule is a fixture in `fixtures/` and a
+case in `lint-plugin.test.ts`; the test runs oxlint on the fixtures and asserts the diagnostics.
+
+## Known version pins
+
+- Stryker runs `inPlace` because TypeScript 7 no longer ships the programmatic compiler API; comment
+  stripping parses with `oxc-parser` for the same reason
+- the `node` preset pins TypeScript 6, because the Nest CLI needs that API to build
 
 ## Sources
 
