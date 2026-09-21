@@ -6,7 +6,6 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const PRESETS = path.resolve(ROOT, "presets");
 const NOT_COPIED = new Set(["CLAUDE.md", "package.json", "README.md"]);
 const KEEPS_PRESETS = "monorepo";
-const EXTRA_OXLINT_CONFIG = /^\.oxlintrc\..+\.json$/;
 
 const readJson = (file) => JSON.parse(readFileSync(file, "utf8"));
 const writeJson = (file, data) => writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
@@ -22,15 +21,6 @@ if (names.length === 0 || names.some((name) => !available.includes(name))) {
   process.exit(1);
 }
 
-const extendRootConfig = (file) => {
-  const rootConfigFile = path.resolve(ROOT, ".oxlintrc.json");
-  const rootConfig = readJson(rootConfigFile);
-
-  rootConfig.extends = [...new Set([...(rootConfig.extends ?? []), `./${file}`])];
-
-  writeJson(rootConfigFile, rootConfig);
-};
-
 const copyEntry = (dir, entry) => {
   const target = path.resolve(ROOT, entry);
 
@@ -39,8 +29,6 @@ const copyEntry = (dir, entry) => {
   if (entry.endsWith(".json")) {
     writeFileSync(target, readFileSync(target, "utf8").replaceAll("../../", "./"));
   }
-
-  if (EXTRA_OXLINT_CONFIG.test(entry)) extendRootConfig(entry);
 };
 
 const copyFiles = (preset) => {

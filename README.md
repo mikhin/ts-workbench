@@ -14,7 +14,7 @@ Use this repo as a GitHub template (or clone it and drop `.git`), then:
 
 ```
 pnpm install
-pnpm preset react            # or: node | react playwright | monorepo
+pnpm preset react            # or: node | monorepo
 ```
 
 `pnpm preset` copies the preset's files over the root, points their `extends` at the root base
@@ -27,12 +27,11 @@ the thin files, leave the base alone so an upgrade is a copy.
 
 ## Presets
 
-| Preset       | Adds                                                                                                                                                                                                        |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `react`      | React 19 and Vite, jsx-a11y, `react-you-might-not-need-an-effect`, layer boundaries over components/pages/hooks/services/stores/lib/types, happy-dom for Vitest, a component and a service with their specs |
-| `node`       | NestJS on Fastify, layer boundaries over controllers/modules/dto/services/repositories, classes only where a decorator needs one, SWC for Vitest, a controller and a service with their specs               |
-| `playwright` | Playwright, its oxlint rule set for `tests/**`, a config that runs the app itself, one smoke spec                                                                                                           |
-| `monorepo`   | `pnpm-workspace.yaml` and root scripts that fan out with `pnpm -r`; keeps `presets/` so each app starts from one                                                                                            |
+| Preset     | Adds                                                                                                                                                                                                                                     |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `react`    | React 19 and Vite, jsx-a11y, `react-you-might-not-need-an-effect`, layer boundaries over components/pages/hooks/services/stores/lib/types, happy-dom for Vitest, Playwright with its own CI job, a component, a service and a smoke spec |
+| `node`     | NestJS on Fastify, layer boundaries over controllers/modules/dto/services/repositories, classes only where a decorator needs one, SWC for Vitest, a controller and a service with their specs                                            |
+| `monorepo` | `pnpm-workspace.yaml` and root scripts that fan out with `pnpm -r`; keeps `presets/` so each app starts from one                                                                                                                         |
 
 Every preset leaves `pnpm check` green, so the first commit already passes CI.
 
