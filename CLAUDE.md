@@ -19,7 +19,7 @@ Replace `<project>` and fill the Domain section. Delete rules you cannot name an
 
 ## Comments
 
-None. `local/no-comments` fails the lint on any comment that is not a tool directive; `pnpm strip-comments` removes the rest. Both read `scripts/comment-directives.cjs`.
+None. `local/no-comments` fails the lint on any comment that is not a tool directive; `pnpm strip-comments` removes the rest. Both read `scripts/comment-directives.cjs`. A `ponytail:` line marking a known limitation is a directive too, and `capitalized-comments` lets it start in lowercase.
 
 What a comment would have said goes into a name, a test, or the commit message.
 
