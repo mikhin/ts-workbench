@@ -23,6 +23,7 @@
     "eslint-plugin-react-you-might-not-need-an-effect": "^1.0.2",
     "happy-dom": "^20.14.5",
     "vite": "^8.3.0",
+    "vitest-fail-on-console": "^0.10.1",
     "eslint-import-resolver-typescript": "^4.4.5",
     "@playwright/test": "^1.57.0",
     "eslint-plugin-playwright": "^2.12.0"

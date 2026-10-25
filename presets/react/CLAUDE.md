@@ -9,5 +9,6 @@
 - No `useEffect` for derived state, prop-to-state sync or event handling; `react-you-might-not-need-an-effect` fails the lint
 - Display-order filter and sort stay in the component; extract to `/services` for a second consumer or a domain rule
 - Imports through `@/`, never relative across folders
+- A `console.error` or `console.warn` fails the spec (`vitest-fail-on-console`): React reports a missing key or an update outside `act` only there
 - Component specs query through `screen` and drive with `userEvent`; `testing-library/*` fails the lint on containers, node access and `fireEvent`
 - e2e in `tests/` with Playwright, run by its own CI job. Locally run with `CI=1` when a test looks flaky: one worker, two retries, the same as the pipeline. The default four-worker run flakes on its own
