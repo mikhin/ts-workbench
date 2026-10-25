@@ -59,3 +59,12 @@ describe("local/no-branching-exports", () => {
     expect(hits[0]?.message).toContain('"pick"');
   });
 });
+
+describe("local/no-ts-in-components", () => {
+  it("reports a .ts file among components and names where it goes, not test helpers", () => {
+    const hits = forRule("no-ts-in-components");
+
+    expect(hits.map((hit) => hit.filename)).toStrictEqual(["use-toggle.ts"]);
+    expect(hits[0]?.message).toContain("hooks/");
+  });
+});

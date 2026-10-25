@@ -6,5 +6,11 @@
     "local/one-function-export": "error",
     "local/no-branching-exports": "error",
     "local/no-classes": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["components/**/*.ts"],
+      "rules": { "local/no-ts-in-components": "error" }
+    }
+  ]
 }

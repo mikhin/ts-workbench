@@ -1,3 +1,4 @@
+const path = require("node:path");
 const { isDirective } = require("../comment-directives.cjs");
 
 const TEST_FILE = /\.(spec|test)\.[cm]?[jt]sx?$|test-utils\.ts$/;
@@ -146,12 +147,35 @@ const noClasses = {
   },
 };
 
+const noTsInComponents = {
+  create(context) {
+    if (isTestFile(context)) return {};
+
+    const filename = path.basename(context.filename ?? context.getFilename());
+
+    return {
+      Program(node) {
+        context.report({ data: { filename }, messageId: "tsFile", node });
+      },
+    };
+  },
+  meta: {
+    docs: { description: "Disallow .ts files among components" },
+    messages: {
+      tsFile:
+        'components/ holds components only. Move "{{filename}}" to its layer: a hook to hooks/, domain logic to services/, a generic helper to lib/, a type to types/.',
+    },
+    type: "problem",
+  },
+};
+
 module.exports = {
   meta: { name: "eslint-plugin-local" },
   rules: {
     "no-branching-exports": noBranchingExports,
     "no-classes": noClasses,
     "no-comments": noComments,
+    "no-ts-in-components": noTsInComponents,
     "one-function-export": oneFunctionExport,
   },
 };

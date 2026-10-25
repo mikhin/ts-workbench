@@ -358,6 +358,12 @@
       }
     },
     {
+      "files": ["src/components/**/*.ts"],
+      "rules": {
+        "local/no-ts-in-components": "error"
+      }
+    },
+    {
       "files": ["src/components/ui/**/*.{ts,tsx}"],
       "rules": {
         "react/no-multi-comp": "off",
