@@ -1,6 +1,7 @@
 ## React
 
 - Function components and hooks; `useState` for local UI state only, business state in `/stores`
+- The React Compiler memoizes components (`vite.config.ts`); no hand-written `useMemo`, `useCallback` or `memo`
 - Layers: `components/` (with `components/ui` as the design system), `pages/`, `hooks/`, `services/`, `stores/`, `lib/`, `types/`; `.oxlintrc.json` names what each may import
 - One component per file; `react/no-multi-comp` fails the lint (off for `components/ui` and specs)
 - `components/` holds `.tsx` only; `local/no-ts-in-components` fails the lint on a `.ts` there and names its layer
