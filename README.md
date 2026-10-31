@@ -39,7 +39,7 @@ Every preset leaves `pnpm check` green, so the first commit already passes CI.
 
 | Script                                | What                                                                                                                             |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `check`                               | everything below except mutation, in order; the CI runs the same as separate jobs                                                |
+| `check`                               | formatting, lint, types, tests, hygiene and builds; diagnostics and mutation are separate                                        |
 | `format`, `lint`, `typecheck`, `test` | oxfmt, oxlint, tsc, vitest with coverage                                                                                         |
 | `mutation`                            | Stryker over `src`, report in `reports/mutation/index.html`; `mutation:changed` mutates only files changed against `origin/main` |
 | `deadcode`                            | knip: unused files, exports, dependencies                                                                                        |
@@ -47,6 +47,22 @@ Every preset leaves `pnpm check` green, so the first commit already passes CI.
 | `dead-mocks`                          | `vi.mock()` of a module that does not exist or of exports the module does not have                                               |
 | `dup`, `dup:top`                      | jscpd; `dup:top` groups clones by fragment and drops scaffolding, `--pairs`, `--grep`, `--all`                                   |
 | `strip-comments`                      | removes every comment that is not a tool directive; `--dry` to preview                                                           |
+| `lint:types`                          | type-aware Promise, unsafe-value and exhaustive-switch checks on TypeScript; also part of `lint` and staged-file hooks           |
+| `test:tooling`                        | Node tests for development scripts, including a fast-check property test                                                         |
+| `dup:types`                           | repeated named object shapes; compares syntax, not resolved type identities                                                      |
+| `dead-methods`                        | service methods without static property reads; review dynamic access and external consumers                                      |
+| `drift`                               | calculations in UI, branches in stores and services without colocated tests                                                      |
+| `service-map [folder]`                | service imports and consumers; no downloads or Graphviz required                                                                 |
+
+`dup:types`, `dead-methods`, `drift` and `service-map` are advisory. They use the source files and
+exclusions from `knip.json`; findings do not fail CI, but parse errors do.
+
+The React preset adds `react-doctor`, `storybook`, `storybook:build`, `test:e2e:coverage` and
+`unreached [base-ref]`. React Doctor fails on errors, skipped checks and unrecognized output.
+E2E specs import `test` from `tests/fixtures`; coverage requires a complete Chromium run.
+`unreached` rejects stale source hashes, runs unit tests, and reports changed statement lines
+reached by neither suite. It is a diagnostic, not a branch-coverage guarantee. E2E runs on PRs,
+main pushes, nightly and on demand. Storybook and React Doctor run in the build CI job.
 
 ## Hooks
 
@@ -59,6 +75,9 @@ Every preset leaves `pnpm check` green, so the first commit already passes CI.
 `scripts/lint-plugin` is an ESLint-API plugin loaded by oxlint as `local/*`. Rules: `no-comments`,
 `one-function-export`, `no-branching-exports`, `no-classes`. A rule is a fixture in `fixtures/` and a
 case in `lint-plugin.test.ts`; the test runs oxlint on the fixtures and asserts the diagnostics.
+
+The React preset also enables `no-effect-rule-disable`: effect/ref checks cannot be silenced
+inline, including blanket disables. A reviewed exception belongs in a scoped lint configuration.
 
 ## Known version pins
 

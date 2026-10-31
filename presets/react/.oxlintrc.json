@@ -328,7 +328,8 @@
       }
     ],
     "react-you-might-not-need-an-effect/no-external-store-subscription": "error",
-    "react/function-component-definition": "off"
+    "react/function-component-definition": "off",
+    "local/no-effect-rule-disable": "error"
   },
   "overrides": [
     {
@@ -398,7 +399,12 @@
     },
     {
       "files": ["src/**/*.spec.tsx", "src/**/*.test.tsx"],
-      "jsPlugins": [{ "name": "testing-library", "specifier": "eslint-plugin-testing-library" }],
+      "jsPlugins": [
+        {
+          "name": "testing-library",
+          "specifier": "eslint-plugin-testing-library"
+        }
+      ],
       "rules": {
         "testing-library/await-async-queries": "error",
         "testing-library/await-async-utils": "error",
@@ -492,6 +498,30 @@
         "playwright/require-hook": "off",
         "playwright/no-hooks": "off"
       }
+    },
+    {
+      "files": [".storybook/*.ts", "src/**/*.stories.tsx"],
+      "rules": {
+        "import/no-default-export": "off",
+        "react/only-export-components": "off",
+        "react/no-multi-comp": "off",
+        "filename-export/match-named-export": "off"
+      }
+    },
+    {
+      "files": ["tests/**/*.ts", ".storybook/*.ts"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "no-relative-import-paths/no-relative-import-paths": "off"
+      }
+    },
+    {
+      "files": ["tests/coverage-reporter.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
     }
   ],
   "ignorePatterns": [
@@ -501,6 +531,7 @@
     "src/api",
     "public",
     "scripts/lint-plugin/fixtures",
-    "presets"
+    "presets",
+    "storybook-static"
   ]
 }

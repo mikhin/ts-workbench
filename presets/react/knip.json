@@ -1,6 +1,12 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "entry": ["src/main.tsx", "scripts/*.mjs", "scripts/lint-plugin/index.cjs"],
+  "entry": [
+    "src/main.tsx",
+    "src/**/*.stories.tsx",
+    "scripts/*.mjs",
+    "scripts/lint-plugin/index.cjs",
+    "tests/coverage-reporter.ts"
+  ],
   "project": ["src/**/*.{ts,tsx}", "scripts/**/*.{mjs,cjs}"],
   "ignore": ["src/api/**", "src/components/ui/**"],
   "ignoreDependencies": ["^eslint-plugin-", "^@stylistic/"],
