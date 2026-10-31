@@ -13,6 +13,7 @@ const ignoredByKnip = (file) =>
 export const knipEntries = () =>
   (knipConfig.entry ?? [])
     .filter((entry) => entry.startsWith("src/"))
+    .flatMap((entry) => globSync(entry, { cwd: ROOT }))
     .map((entry) => path.resolve(ROOT, entry));
 
 export const sourceFiles = () =>
