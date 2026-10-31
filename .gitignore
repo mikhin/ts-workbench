@@ -18,3 +18,5 @@ CLAUDE.local.md
 /playwright-report/
 /test-results/
 /playwright/.cache/
+/.tooling-test-*/
+/storybook-static/
