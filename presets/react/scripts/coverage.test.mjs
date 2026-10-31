@@ -6,17 +6,32 @@ import { coverageLines } from "./coverage-state.mjs";
 import { doctorPassed } from "./react-doctor-result.mjs";
 
 test("React Doctor fails on skipped checks, errors, missing summaries and failed processes", () => {
-  assert.equal(doctorPassed(0, "✔ No issues found!"), true);
+  const project = { analyzedFileCount: 2, complete: true, skippedChecks: [] };
+  const report = { ok: true, projects: [project], summary: { errorCount: 0 } };
+  const output = JSON.stringify(report);
 
-  assert.equal(doctorPassed(0, "⚠ 19 warnings across 19/1523 files"), true);
+  assert.equal(doctorPassed(0, output), true);
 
-  assert.equal(doctorPassed(0, "✗ 1 error across 1/12 files"), false);
+  assert.equal(doctorPassed(0, JSON.stringify({ ...report, summary: { errorCount: 1 } })), false);
 
-  assert.equal(doctorPassed(0, "non-fatal, skipping\n✔ No issues found!"), false);
+  assert.equal(
+    doctorPassed(
+      0,
+      JSON.stringify({ ...report, projects: [{ ...project, skippedChecks: ["lint"] }] }),
+    ),
+    false,
+  );
+
+  assert.equal(
+    doctorPassed(0, JSON.stringify({ ...report, projects: [{ ...project, complete: false }] })),
+    false,
+  );
+
+  assert.equal(doctorPassed(0, JSON.stringify({ ...report, projects: [] })), false);
 
   assert.equal(doctorPassed(0, "Unexpected output"), false);
 
-  assert.equal(doctorPassed(1, "✔ No issues found!"), false);
+  assert.equal(doctorPassed(1, output), false);
 
   assert.equal(doctorPassed(null, ""), false);
 });
