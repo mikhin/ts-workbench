@@ -9,7 +9,13 @@ export default defineConfig({
   },
   test: {
     coverage: {
-      exclude: ["src/**/*.{test,spec}.{ts,tsx}", "src/api/**", "src/mocks/**", "src/main.tsx"],
+      exclude: [
+        "src/**/*.{test,spec}.{ts,tsx}",
+        "src/api/**",
+        "src/mocks/**",
+        "src/main.tsx",
+        "src/**/*.stories.tsx",
+      ],
       include: ["src/**/*.{ts,tsx}"],
       provider: "v8",
       reportsDirectory: "reports/coverage",

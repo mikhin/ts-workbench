@@ -87,6 +87,8 @@ const removeSelf = () => {
   rmSync(PRESETS, { recursive: true });
 
   rmSync(path.resolve(ROOT, "scripts/preset.mjs"));
+
+  rmSync(path.resolve(ROOT, ".github/workflows/presets.yml"), { force: true });
 };
 
 for (const preset of names) {

@@ -1,5 +1,6 @@
 const path = require("node:path");
 const { isDirective } = require("../comment-directives.cjs");
+const noEffectRuleDisable = require("./no-effect-rule-disable.cjs");
 
 const TEST_FILE = /\.(spec|test)\.[cm]?[jt]sx?$|test-utils\.ts$/;
 
@@ -175,6 +176,7 @@ module.exports = {
     "no-branching-exports": noBranchingExports,
     "no-classes": noClasses,
     "no-comments": noComments,
+    "no-effect-rule-disable": noEffectRuleDisable,
     "no-ts-in-components": noTsInComponents,
     "one-function-export": oneFunctionExport,
   },

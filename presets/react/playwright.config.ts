@@ -12,7 +12,7 @@ export default defineConfig({
   forbidOnly: Boolean(process.env["CI"]),
   fullyParallel: true,
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  reporter: "html",
+  reporter: process.env["E2E_COVERAGE"] ? [["html"], ["./tests/coverage-reporter.ts"]] : "html",
   retries: process.env["CI"] ? 2 : 0,
   testDir: "./tests",
   timeout: TEST_TIMEOUT,

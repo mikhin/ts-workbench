@@ -1,6 +1,6 @@
 {
   "pattern": "{src,scripts}/**/*.{ts,tsx,mjs,cjs}",
-  "ignore": ["**/*.{test,spec}.{ts,tsx}", "**/fixtures/**", "**/node_modules/**"],
+  "ignore": ["**/*.{test,spec}.{ts,tsx,mjs,cjs}", "**/fixtures/**", "**/node_modules/**"],
   "minLines": 6,
   "minTokens": 40,
   "threshold": 0,

@@ -1,4 +1,8 @@
 {
   "*": "oxfmt --no-error-on-unmatched-pattern",
-  "**/*.{ts,tsx,mts,cts,js,mjs,cjs}": "oxlint -c .oxlintrc.json --deny-warnings --no-error-on-unmatched-pattern"
+  "**/*.{ts,tsx,mts,cts}": [
+    "oxlint -c .oxlintrc.json --deny-warnings --no-error-on-unmatched-pattern",
+    "oxlint --type-aware -c .oxlintrc.type-aware.json --deny-warnings --no-error-on-unmatched-pattern"
+  ],
+  "**/*.{js,mjs,cjs}": "oxlint -c .oxlintrc.json --deny-warnings --no-error-on-unmatched-pattern"
 }

@@ -26,6 +26,14 @@ const diagnostics = lint();
 const forRule = (rule: string): Diagnostic[] =>
   diagnostics.filter((diagnostic) => diagnostic.code === `local(${rule})`);
 
+describe("local/no-effect-rule-disable", () => {
+  it("keeps effect checks enabled", () => {
+    expect(forRule("no-effect-rule-disable").map((hit) => hit.filename)).toStrictEqual([
+      "guarded.ts",
+    ]);
+  });
+});
+
 describe("local/no-comments", () => {
   it("reports prose comments and keeps directives", () => {
     const hits = forRule("no-comments");

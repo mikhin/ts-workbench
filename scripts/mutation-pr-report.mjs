@@ -1,6 +1,8 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 
+import { addedLines } from "./added-lines.mjs";
+
 const MARKER = "<!-- mutation-report -->";
 const SURVIVING = new Set(["NoCoverage", "Survived"]);
 const MAX_PER_FILE = 12;
@@ -14,16 +16,8 @@ const changedLines = (file) => {
   const diff = execFileSync("git", ["diff", "--unified=0", `${baseRef}...HEAD`, "--", file], {
     encoding: "utf8",
   });
-  const lines = new Set();
 
-  for (const hunk of diff.matchAll(/^@@ -\S+ \+(\d+)(?:,(\d+))? @@/gm)) {
-    const start = Number(hunk[1]);
-    const count = hunk[2] === undefined ? 1 : Number(hunk[2]);
-
-    for (let line = start; line < start + count; line++) lines.add(line);
-  }
-
-  return lines;
+  return addedLines(diff);
 };
 
 const truncateMiddle = (text, max) => {

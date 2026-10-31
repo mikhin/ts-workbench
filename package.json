@@ -10,8 +10,9 @@
   "scripts": {
     "format": "oxfmt --check .",
     "format:fix": "oxfmt .",
-    "lint": "oxlint -c .oxlintrc.json --deny-warnings",
-    "lint:fix": "oxlint -c .oxlintrc.json --fix",
+    "lint": "oxlint -c .oxlintrc.json --deny-warnings && pnpm lint:types",
+    "lint:types": "oxlint --type-aware -c .oxlintrc.type-aware.json --deny-warnings --no-error-on-unmatched-pattern",
+    "lint:fix": "oxlint -c .oxlintrc.json --deny-warnings --fix && pnpm lint:types",
     "typecheck": "tsc",
     "test": "vitest run --coverage --passWithNoTests",
     "mutation": "stryker run",
@@ -22,9 +23,14 @@
     "dup": "jscpd",
     "dup:top": "jscpd -r json -o reports/jscpd -t 100 -s && node scripts/jscpd-top.mjs",
     "strip-comments": "node scripts/strip-comments.mjs",
-    "check": "pnpm format && pnpm lint && pnpm typecheck && pnpm test && pnpm deadcode && pnpm dead-files && pnpm dead-mocks && pnpm dup && pnpm run --if-present build",
+    "check": "pnpm format && pnpm lint && pnpm typecheck && pnpm test && pnpm test:tooling && pnpm deadcode && pnpm dead-files && pnpm dead-mocks && pnpm dup && pnpm run --if-present build",
     "prepare": "simple-git-hooks",
-    "preset": "node scripts/preset.mjs"
+    "preset": "node scripts/preset.mjs",
+    "test:tooling": "node --test scripts/*.test.mjs scripts/lint-plugin/*.test.mjs",
+    "dup:types": "node scripts/find-duplicate-types.mjs",
+    "dead-methods": "node scripts/find-dead-service-methods.mjs",
+    "service-map": "node scripts/service-map.mjs",
+    "drift": "node scripts/architecture-drift.mjs"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^10.0.0",
@@ -42,7 +48,9 @@
     "oxlint": "^1.83.0",
     "simple-git-hooks": "^2.14.0",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.11",
+    "fast-check": "^4.10.2",
+    "oxlint-tsgolint": "^7.0.2005"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
