@@ -35,7 +35,7 @@
     "eslint-plugin-playwright": "^2.12.0",
     "@storybook/react-vite": "^10.6.0",
     "storybook": "^10.6.0",
-    "react-doctor": "^0.0.14",
+    "react-doctor": "^0.9.18",
     "monocart-coverage-reports": "^3.2.0"
   }
 }
