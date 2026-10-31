@@ -1,14 +1,23 @@
 import { spawnSync } from "node:child_process";
-import { stripVTControlCharacters } from "node:util";
+import { globSync } from "node:fs";
 
 import { doctorPassed } from "./react-doctor-result.mjs";
 
-const result = spawnSync("pnpm", ["exec", "react-doctor", "--verbose", "--no-dead-code"], {
-  encoding: "utf8",
-});
-const output = stripVTControlCharacters(`${result.stdout ?? ""}${result.stderr ?? ""}`);
+const files = globSync("src/**/*.{ts,tsx}").filter(
+  (file) => !/\.(test|spec|stories)\.tsx?$/.test(file) && !file.endsWith(".d.ts"),
+);
+const result = spawnSync(
+  "pnpm",
+  ["exec", "react-doctor", ...files, "--json", "--no-score", "--no-supply-chain"],
+  {
+    encoding: "utf8",
+  },
+);
+const output = result.stdout ?? "";
 
 process.stdout.write(output);
+
+process.stderr.write(result.stderr ?? "");
 
 if (!doctorPassed(result.status, output)) {
   console.error("React Doctor failed, skipped its lint pass, or returned no recognized summary.");

@@ -1,8 +1,22 @@
-import { stripVTControlCharacters } from "node:util";
-
 export const doctorPassed = (status, output) => {
-  const text = stripVTControlCharacters(output);
-  const summarized = /across \d+\/\d+ files/.test(text) || text.includes("No issues found!");
+  if (status !== 0) return false;
 
-  return status === 0 && summarized && !/✗ [1-9]\d* errors?|non-fatal, skipping/.test(text);
+  try {
+    const report = JSON.parse(output);
+
+    return (
+      report.ok === true &&
+      report.summary?.errorCount === 0 &&
+      report.projects?.length > 0 &&
+      report.projects.every(
+        (project) =>
+          project.complete === true &&
+          project.analyzedFileCount > 0 &&
+          Array.isArray(project.skippedChecks) &&
+          project.skippedChecks.length === 0,
+      )
+    );
+  } catch {
+    return false;
+  }
 };
