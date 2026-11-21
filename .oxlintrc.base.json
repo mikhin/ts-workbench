@@ -98,6 +98,7 @@
     ],
     "unicorn/number-literal-case": "off",
     "local/no-comments": "error",
+    "local/no-redundant-type-alias": "error",
     "@stylistic/padding-line-between-statements": [
       "error",
       {
@@ -501,7 +502,8 @@
         "vitest/no-conditional-in-test": "off",
         "vitest/prefer-lowercase-title": "off",
         "vitest/prefer-strict-equal": "off",
-        "vitest/require-mock-type-parameters": "off"
+        "vitest/require-mock-type-parameters": "off",
+        "local/no-shape-assertion": "error"
       }
     },
     {

@@ -68,6 +68,38 @@ describe("local/no-branching-exports", () => {
   });
 });
 
+describe("local/no-redundant-type-alias", () => {
+  it("reports a local rename, not an exported one", () => {
+    const hits = forRule("no-redundant-type-alias");
+
+    expect(hits.map((hit) => hit.message)).toStrictEqual([
+      'Use "Label" directly instead of the redundant local alias "Caption".',
+    ]);
+  });
+});
+
+describe("local/no-ref-write-queue", () => {
+  it("reports a promise ref and a counter ref, not a DOM ref", () => {
+    const hits = forRule("no-ref-write-queue");
+
+    expect(hits.map((hit) => hit.message.split(" ").slice(0, 2).join(" "))).toStrictEqual([
+      'The "saves"',
+      'The "queue"',
+    ]);
+  });
+});
+
+describe("local/no-shape-assertion", () => {
+  it("reports toBeDefined and toBeTruthy, not toBe", () => {
+    const hits = forRule("no-shape-assertion");
+
+    expect(hits.map((hit) => hit.message.split(" ")[0])).toStrictEqual([
+      "toBeDefined",
+      "toBeTruthy",
+    ]);
+  });
+});
+
 describe("local/no-ts-in-components", () => {
   it("reports a .ts file among components and names where it goes, not test helpers", () => {
     const hits = forRule("no-ts-in-components");

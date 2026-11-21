@@ -6,7 +6,10 @@
     "local/no-effect-rule-disable": "error",
     "local/one-function-export": "error",
     "local/no-branching-exports": "error",
-    "local/no-classes": "error"
+    "local/no-classes": "error",
+    "local/no-redundant-type-alias": "error",
+    "local/no-ref-write-queue": "error",
+    "local/no-shape-assertion": "error"
   },
   "overrides": [
     {
