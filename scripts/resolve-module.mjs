@@ -1,7 +1,7 @@
 import { globSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 
-export const ROOT = path.resolve(import.meta.dirname, "..");
+export const ROOT = process.cwd();
 
 export const SRC = path.resolve(ROOT, "src");
 

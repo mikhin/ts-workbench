@@ -5,7 +5,8 @@
     "emitDecoratorMetadata": true,
     "erasableSyntaxOnly": false,
     "verbatimModuleSyntax": false,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": { "@/*": ["./src/*"] }
   },
   "include": ["src", "scripts", "*.ts", "tests"],
   "exclude": ["scripts/lint-plugin/fixtures"]
