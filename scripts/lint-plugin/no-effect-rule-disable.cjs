@@ -1,5 +1,5 @@
 const GUARDED =
-  /^(?:react-you-might-not-need-an-effect\/[\w-]+|react(?:-hooks)?\/(?:exhaustive-deps|immutability|no-deriving-state-in-effects|refs|set-state-in-effect|set-state-in-render))$/;
+  /^(?:react-you-might-not-need-an-effect\/[\w-]+|react(?:-hooks)?\/(?:exhaustive-deps|immutability|no-deriving-state-in-effects|refs|set-state-in-effect|set-state-in-render)|local\/no-ref-write-queue)$/;
 
 module.exports = {
   create(context) {

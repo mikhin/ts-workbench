@@ -139,6 +139,7 @@
     "react-you-might-not-need-an-effect/no-initialize-state": "error",
     "react-you-might-not-need-an-effect/no-chain-state-updates": "error",
     "react-you-might-not-need-an-effect/no-derived-state": "error",
+    "local/no-ref-write-queue": "error",
     "react/no-multi-comp": "error",
     "react/jsx-filename-extension": "off",
     "react/jsx-no-literals": "off",
