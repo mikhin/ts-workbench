@@ -30,7 +30,9 @@ Then delete `presets/` and `scripts/preset.mjs`, and drop the `preset` script fr
 ## What changes at the root
 
 - lint with plain `oxlint`, no `-c`: it picks the nearest `.oxlintrc.json` per file, and each app's
-  config extends the root base by relative path
+  config extends the root base by relative path. Without `-c` the root `ignorePatterns` no longer
+  apply, so `lint:oxlint` ignores the lint-plugin fixtures by flag; point `.nano-staged.json` at
+  `pnpm --silent lint:oxlint` instead of `oxlint -c .oxlintrc.json`
 - `.jscpd.json` pattern becomes `{apps,packages}/*/src/**/*.{ts,tsx}`
 - `knip.json` moves to workspaces:
 
@@ -43,9 +45,9 @@ Then delete `presets/` and `scripts/preset.mjs`, and drop the `preset` script fr
 }
 ```
 
-- `scripts/find-dead-code.mjs` and `find-dead-mocks.mjs` read `knip.json` and `src/` next to
-  themselves, so run them from inside the app (`pnpm -r run dead-files` does that) and give each app
-  its own `knip.json`
+- `scripts/find-dead-code.mjs` and `find-dead-mocks.mjs` read `knip.json` and `src/` from the
+  current directory, so run them from inside the app (`pnpm -r run dead-files` does that) and give
+  each app its own `knip.json`
 - CI: lint and format once at the root, `typecheck`, `test`, `build` and `mutation` as a matrix over
   the apps with `working-directory: apps/${{ matrix.app }}`
 

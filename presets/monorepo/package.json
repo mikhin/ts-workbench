@@ -2,8 +2,9 @@
   "scripts": {
     "format": "oxfmt --check .",
     "format:fix": "oxfmt .",
-    "lint": "oxlint --deny-warnings",
-    "lint:fix": "oxlint --fix",
+    "lint": "pnpm lint:oxlint && pnpm lint:types",
+    "lint:oxlint": "oxlint --deny-warnings --no-error-on-unmatched-pattern --ignore-pattern 'scripts/lint-plugin/fixtures/**'",
+    "lint:fix": "pnpm lint:oxlint --fix && pnpm lint:types",
     "typecheck": "pnpm -r --parallel run typecheck",
     "test": "pnpm -r --parallel run test",
     "mutation": "pnpm -r run mutation",
