@@ -46,7 +46,7 @@ const report = JSON.parse(readFileSync(REPORT, "utf8"));
 const normalize = (fragment) => fragment.replaceAll(/\s+/g, " ").trim();
 
 const signalWords = (fragment) => {
-  const withoutImports = fragment.replace(IMPORT_RE, " ").replace(REEXPORT_RE, " ");
+  const withoutImports = fragment.replaceAll(IMPORT_RE, " ").replaceAll(REEXPORT_RE, " ");
 
   return new Set(
     (withoutImports.match(WORD_RE) ?? []).filter(
