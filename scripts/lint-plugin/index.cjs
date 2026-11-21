@@ -1,6 +1,9 @@
 const path = require("node:path");
 const { isDirective } = require("../comment-directives.cjs");
 const noEffectRuleDisable = require("./no-effect-rule-disable.cjs");
+const noRedundantTypeAlias = require("./no-redundant-type-alias.cjs");
+const noRefWriteQueue = require("./no-ref-write-queue.cjs");
+const noShapeAssertion = require("./no-shape-assertion.cjs");
 
 const TEST_FILE = /\.(spec|test)\.[cm]?[jt]sx?$|test-utils\.ts$/;
 
@@ -177,6 +180,9 @@ module.exports = {
     "no-classes": noClasses,
     "no-comments": noComments,
     "no-effect-rule-disable": noEffectRuleDisable,
+    "no-redundant-type-alias": noRedundantTypeAlias,
+    "no-ref-write-queue": noRefWriteQueue,
+    "no-shape-assertion": noShapeAssertion,
     "no-ts-in-components": noTsInComponents,
     "one-function-export": oneFunctionExport,
   },
