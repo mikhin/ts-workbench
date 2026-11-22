@@ -13,6 +13,8 @@
     "dead-mocks": "pnpm -r run dead-mocks",
     "dup": "jscpd",
     "build": "pnpm -r run build",
+    "storybook:build": "pnpm -r --if-present run storybook:build",
+    "react-doctor": "pnpm -r --if-present run react-doctor",
     "check": "pnpm format && pnpm lint && pnpm typecheck && pnpm test && pnpm deadcode && pnpm dead-files && pnpm dead-mocks && pnpm dup && pnpm build"
   }
 }
